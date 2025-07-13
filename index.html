@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LuxeStore - All In One</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: Arial, sans-serif; background-color: beige; color: #333; }
+
+    .navbar { background-color: #333; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+    .logo { color: #fff; font-size: 24px; font-weight: bold; }
+    .nav-links { list-style: none; display: flex; }
+    .nav-links li { margin-left: 20px; }
+    .nav-links a { color: white; text-decoration: none; font-size: 18px; }
+    .nav-links a:hover { text-decoration: underline; }
+
+    .slideshow { position: relative; width: 100%; height: 400px; overflow: hidden; }
+    .slides { width: 500%; height: 100%; display: flex; animation: slide 20s infinite; }
+    .slides img { width: 100%; height: 400px; object-fit: cover; }
+    .fixed-slide-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 48px; font-weight: bold; text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8); }
+
+    @keyframes slide {
+      0% {margin-left: 0%;} 20% {margin-left: 0%;} 25% {margin-left: -100%;}
+      45% {margin-left: -100%;} 50% {margin-left: -200%;} 70% {margin-left: -200%;}
+      75% {margin-left: -300%;} 95% {margin-left: -300%;} 100% {margin-left: -400%;}
+    }
+
+    section { padding: 60px 20px; }
+    .product-grid, .cart-item-container {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; max-width: 1200px; margin: auto;
+    }
+    .product-card { perspective: 1000px; }
+    .card-inner {
+      position: relative; width: 100%; height: 400px; transition: transform 0.6s; transform-style: preserve-3d;
+    }
+    .product-card:hover .card-inner { transform: rotateY(180deg); }
+    .card-front, .card-back {
+      position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .card-front img { width: 100%; height: 100%; object-fit: cover; }
+    .card-back {
+      background-color: #ff6347; color: white; transform: rotateY(180deg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;
+    }
+    .card-back h3 { font-size: 24px; }
+    .card-back p { font-size: 20px; margin-bottom: 15px; }
+    .card-back button {
+      background-color: white; color: #ff6347; border: none; padding: 10px 20px;
+      font-size: 16px; border-radius: 5px; cursor: pointer;
+    }
+    .card-back button:hover { background-color: #ffe6e1; }
+
+    .cart-item {
+      display: flex; align-items: center; justify-content: space-between; padding: 15px;
+      border: 1px solid #ccc; background-color: #fff; border-radius: 8px;
+    }
+    .cart-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; }
+    .checkout-btn {
+      display: block; margin: 30px auto 0; padding: 15px 30px; background-color: #ff6347;
+      color: white; font-size: 18px; border: none; border-radius: 8px; cursor: pointer;
+    }
+    .contact-form {
+      display: grid; gap: 20px; max-width: 600px; margin: auto;
+    }
+    .contact-form input, .contact-form textarea {
+      padding: 15px; font-size: 16px; border: 1px solid #ccc; border-radius: 8px;
+    }
+    .contact-form button {
+      background-color: #ff6347; color: white; font-size: 18px; padding: 12px;
+      border: none; border-radius: 5px; cursor: pointer;
+    }
+    footer { background-color: #333; color: white; padding: 20px; text-align: center; margin-top: 60px; }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">🛍️ LuxeStore</div>
+    <nav><ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#cart">Cart</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul></nav>
+  </header>
+
+  <!-- HOME -->
+  <section id="home">
+    <div class="slideshow">
+      <div class="slides">
+        <img src="images/slide1.jpg" />
+        <img src="images/slide2.jpg" />
+        <img src="images/slide3.jpg" />
+        <img src="images/slide4.jpg" />
+        <img src="images/slide5.jpg" />
+      </div>
+      <div class="fixed-slide-text" style="text-align: center;">
+  Discover YOUR Style<br>
+  <a href="#shop" style="
+    margin-top: 20px;
+    display: inline-block;
+    background-color: red;
+    color: white;
+    font-size: 20px;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease;
+  ">Shop Now</a>
+</div>
+    </div>
+  </section>
+
+  <!-- SHOP -->
+  <section id="shop">
+    <h2 style="text-align:center; font-size:36px; margin-bottom:30px;">Our Products</h2>
+    <div class="product-grid">
+      <!-- Existing cards -->
+      <div class="product-card"><div class="card-inner"><div class="card-front"><img src="images/shirt.jpg" /></div><div class="card-back"><h3>Casual Shirt</h3><p>₹899</p><button>Add to Cart</button></div></div></div>
+      <div class="product-card"><div class="card-inner"><div class="card-front"><img src="images/shoes.jpg" /></div><div class="card-back"><h3>Sport Shoes</h3><p>₹1799</p><button>Add to Cart</button></div></div></div>
+      <div class="product-card"><div class="card-inner"><div class="card-front"><img src="images/perfume.jpg" /></div><div class="card-back"><h3>Luxury Perfume</h3><p>₹1299</p><button>Add to Cart</button></div></div></div>
+
+      <!-- Added cards -->
+      <div class="product-card"><div class="card-inner"><div class="card-front"><img src="images/classic-shirt.jpg" /></div><div class="card-back"><h3>Classic T-Shirt</h3><p>₹799</p><button>Add to Cart</button></div></div></div>
+      <div class="product-card"><div class="card-inner"><div class="card-front"><img src="images/leather-sneakers.jpg" /></div><div class="card-back"><h3>Leather Sneakers</h3><p>₹1999</p><button>Add to Cart</button></div></div></div>
+      <div class="product-card"><div class="card-inner"><div class="card-front"><img src="images/smart-watch.jpg" /></div><div class="card-back"><h3>Smart Watch</h3><p>₹3499</p><button>Add to Cart</button></div></div></div>
+      <div class="product-card"><div class="card-inner"><div class="card-front"><img src="images/sunglasses.jpg" /></div><div class="card-back"><h3>Stylish Sunglasses</h3><p>₹1499</p><button>Add to Cart</button></div></div></div>
+      <div class="product-card"><div class="card-inner"><div class="card-front"><img src="images/traditional.jpg" /></div><div class="card-back"><h3>Traditional Wear</h3><p>₹2499</p><button>Add to Cart</button></div></div></div>
+      <div class="product-card"><div class="card-inner"><div class="card-front"><img src="images/skincare.jpg" /></div><div class="card-back"><h3>SkinCare</h3><p>₹999</p><button>Add to Cart</button></div></div></div>
+      <div class="product-card"><div class="card-inner"><div class="card-front"><img src="images/backpack.jpg" /></div><div class="card-back"><h3>Leather Backpack</h3><p>₹2499</p><button>Add to Cart</button></div></div></div>
+      <div class="product-card"><div class="card-inner"><div class="card-front"><img src="images/digital-watch.jpg" /></div><div class="card-back"><h3>Digital Watch</h3><p>₹1999</p><button>Add to Cart</button></div></div></div>
+      <div class="product-card"><div class="card-inner"><div class="card-front"><img src="images/winter-jacket.jpg" /></div><div class="card-back"><h3>Winter Jacket</h3><p>₹3299</p><button>Add to Cart</button></div></div></div>
+      <div class="product-card"><div class="card-inner"><div class="card-front"><img src="images/kidswear.jpg" /></div><div class="card-back"><h3>Kids Wear</h3><p>₹600</p><button>Add to Cart</button></div></div></div>
+      <div class="product-card"><div class="card-inner"><div class="card-front"><img src="images/sarees.jpg" /></div><div class="card-back"><h3>Sarees</h3><p>₹1999</p><button>Add to Cart</button></div></div></div>
+    <div class="product-card"><div class="card-inner"><div class="card-front"><img src="images/accessories.jpg" /></div><div class="card-back"><h3>accessories</h3><p>₹400</p><button>Add to Cart</button></div></div></div>
+
+    </div>
+  </section>
+
+  <!-- CART -->
+  <section id="cart">
+    <h2 style="text-align:center; font-size:36px; margin-bottom:30px;">Your Cart</h2>
+    <div class="product-grid">
+      <div class="cart-item"><img src="images/shirt.jpg" /><div><h4>Casual Shirt</h4><p>Qty: 1</p></div><strong>₹899</strong></div>
+      <div class="cart-item"><img src="images/shoes.jpg" /><div><h4>Sport Shoes</h4><p>Qty: 1</p></div><strong>₹1799</strong></div>
+      <div class="cart-item"><img src="images/perfume.jpg" /><div><h4>Luxury Perfume</h4><p>Qty: 1</p></div><strong>₹1299</strong></div>
+    </div>
+    <button class="checkout-btn">Proceed to Checkout</button>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2 style="text-align:center; font-size:36px; margin-bottom:20px;">Contact Us</h2>
+    <p style="text-align:center; font-size:18px; margin-bottom:30px;">We’d love to hear from you!</p>
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Your Message" rows="6" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 LuxeStore. All rights reserved.</p>
+  </footer>
+</body>
+</html>
